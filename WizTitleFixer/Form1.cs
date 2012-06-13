@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using System.Text.RegularExpressions;
+using System.Xml;
 //调用Wiz的COM控件
 using WizKMControlsLib;
 using WizKMCoreLib;
@@ -15,6 +16,7 @@ namespace WizTitleFixer
         {
             InitializeComponent();
             this.Text = "WizTitleFixer|v1.0";
+            tbParts.Text=GetConfigValue("myReg");
           
         }
 
@@ -29,7 +31,7 @@ namespace WizTitleFixer
            
             string str;
             str = tbParts.Text;
-          
+            SetConfigValue(str);
             
             wizdb.Open("");
             progress = 0;
@@ -103,11 +105,30 @@ namespace WizTitleFixer
             wizdb.Close();
         }
 
-        private void tbParts_MouseDown(object sender, MouseEventArgs e)
+
+        internal static string GetConfigValue(string key)
         {
-            tbParts.Clear();
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(Application.ExecutablePath + ".config");
+
+            XmlElement xElem = xmlDoc.SelectSingleNode("/configuration/"+key+"") as XmlElement;
+            if (xElem != null)
+                return xElem.InnerText;
+            else
+                return string.Empty;
         }
 
+        internal static void SetConfigValue(string key)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(Application.ExecutablePath + ".config");
+
+            XmlElement xElem = xmlDoc.SelectSingleNode("/configuration/myReg") as XmlElement;
+            if (xElem != null)
+                xElem.InnerText = key;
+            xmlDoc.Save(Application.ExecutablePath + ".config");
+             
+        }
       
     }
 }

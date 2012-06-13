@@ -54,7 +54,6 @@
             this.tbParts.Size = new System.Drawing.Size(384, 21);
             this.tbParts.TabIndex = 2;
             this.tbParts.Text = "请将替换关键词用;分开";
-            this.tbParts.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tbParts_MouseDown);
             // 
             // progressBar1
             // 
