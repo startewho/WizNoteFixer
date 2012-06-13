@@ -15,9 +15,11 @@ namespace WizTitleFixer
         public WizTitleFixer()
         {
             InitializeComponent();
-            this.Text = "WizTitleFixer|v1.0";
-            tbParts.Text=GetConfigValue("myReg");
-          
+            this.Text = "WizTitleFixer|v1.1";
+            foreach (var str in GetConfigValue("myReg").Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
+            {
+                cmbExpress.Items.Add(str);
+            }
         }
 
         int total;
@@ -30,7 +32,7 @@ namespace WizTitleFixer
         {
            
             string str;
-            str = tbParts.Text;
+            str = cmbExpress.Text;
             SetConfigValue(str);
             
             wizdb.Open("");
@@ -111,11 +113,14 @@ namespace WizTitleFixer
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(Application.ExecutablePath + ".config");
 
-            XmlElement xElem = xmlDoc.SelectSingleNode("/configuration/"+key+"") as XmlElement;
-            if (xElem != null)
-                return xElem.InnerText;
-            else
-                return string.Empty;
+            string str = String.Empty;
+            foreach (XmlNode xElem in xmlDoc.SelectNodes("/configuration/" + key + ""))
+            {
+                if (xElem != null)
+                    str += xElem.InnerText + "\r\n";
+            }
+            return str;
+
         }
 
         internal static void SetConfigValue(string key)
