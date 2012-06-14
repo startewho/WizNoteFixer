@@ -2,6 +2,7 @@
 using System.Text;
 using System.Windows.Forms;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Xml;
 //调用Wiz的COM控件
@@ -15,7 +16,7 @@ namespace WizTitleFixer
         public WizTitleFixer()
         {
             InitializeComponent();
-            this.Text = "WizTitleFixer|v1.1";
+            this.Text = "WizTitleFixer|v1.2";
             foreach (var str in GetConfigValue("myReg").Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
             {
                 cmbExpress.Items.Add(str);
@@ -125,12 +126,38 @@ namespace WizTitleFixer
 
         internal static void SetConfigValue(string key)
         {
+        
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(Application.ExecutablePath + ".config");
 
-            XmlElement xElem = xmlDoc.SelectSingleNode("/configuration/myReg") as XmlElement;
-            if (xElem != null)
-                xElem.InnerText = key;
+            //最多可以保存9个
+            Queue qu = new Queue(9);
+
+            foreach (XmlElement xe in xmlDoc.SelectNodes("/configuration/myReg"))
+            {
+                qu.Enqueue(xe.InnerText);
+            }
+
+            if (qu.Count > 9)
+            {
+                qu.Dequeue();
+                qu.TrimToSize();
+            }
+            
+
+            //去除重复的.
+            if (!qu.Contains(key))
+                qu.Enqueue(key);
+          
+            XmlNode root = xmlDoc.SelectSingleNode("configuration");
+            root.RemoveAll();
+           
+            foreach (string str in qu)
+            {
+                XmlElement xElem = xmlDoc.CreateElement("myReg");
+                xElem.InnerText = str;
+                root.AppendChild(xElem);
+            }
             xmlDoc.Save(Application.ExecutablePath + ".config");
              
         }
