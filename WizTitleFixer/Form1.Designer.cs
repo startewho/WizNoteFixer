@@ -35,6 +35,7 @@
             this.btnHelp = new System.Windows.Forms.Button();
             this.lbFixedTitles = new System.Windows.Forms.ListBox();
             this.cmbExpress = new System.Windows.Forms.ComboBox();
+            this.btnRecover = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnReplace
@@ -56,7 +57,7 @@
             // 
             // btnBackUp
             // 
-            this.btnBackUp.Location = new System.Drawing.Point(402, 81);
+            this.btnBackUp.Location = new System.Drawing.Point(402, 71);
             this.btnBackUp.Name = "btnBackUp";
             this.btnBackUp.Size = new System.Drawing.Size(107, 23);
             this.btnBackUp.TabIndex = 4;
@@ -66,7 +67,7 @@
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(402, 154);
+            this.btnHelp.Location = new System.Drawing.Point(402, 181);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(107, 23);
             this.btnHelp.TabIndex = 5;
@@ -80,7 +81,7 @@
             this.lbFixedTitles.ItemHeight = 12;
             this.lbFixedTitles.Location = new System.Drawing.Point(12, 51);
             this.lbFixedTitles.Name = "lbFixedTitles";
-            this.lbFixedTitles.Size = new System.Drawing.Size(384, 196);
+            this.lbFixedTitles.Size = new System.Drawing.Size(384, 208);
             this.lbFixedTitles.TabIndex = 6;
             // 
             // cmbExpress
@@ -91,6 +92,16 @@
             this.cmbExpress.Size = new System.Drawing.Size(383, 20);
             this.cmbExpress.TabIndex = 7;
             // 
+            // btnRecover
+            // 
+            this.btnRecover.Location = new System.Drawing.Point(402, 121);
+            this.btnRecover.Name = "btnRecover";
+            this.btnRecover.Size = new System.Drawing.Size(107, 23);
+            this.btnRecover.TabIndex = 4;
+            this.btnRecover.Text = "Recover";
+            this.btnRecover.UseVisualStyleBackColor = true;
+            this.btnRecover.Click += new System.EventHandler(this.btnRecover_Click);
+            // 
             // WizTitleFixer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -99,6 +110,7 @@
             this.Controls.Add(this.cmbExpress);
             this.Controls.Add(this.lbFixedTitles);
             this.Controls.Add(this.btnHelp);
+            this.Controls.Add(this.btnRecover);
             this.Controls.Add(this.btnBackUp);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btnReplace);
@@ -117,6 +129,7 @@
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.ListBox lbFixedTitles;
         private System.Windows.Forms.ComboBox cmbExpress;
+        private System.Windows.Forms.Button btnRecover;
     }
 }
 

@@ -5,9 +5,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Xml;
+using System.IO;
 //调用Wiz的COM控件
 using WizKMControlsLib;
 using WizKMCoreLib;
+
 
 namespace WizTitleFixer
 {
@@ -44,7 +46,8 @@ namespace WizTitleFixer
 
             foreach (var  doc in wizdb.GetAllDocuments())
             {
-                    doc.ChangeTitleAndFileName(TitleFixer(doc.Title, str));
+                    string s = TitleFixer(doc.Title, str);
+                    doc.ChangeTitleAndFileName(s);
                     progress++;
                     progressBar1.Value = progress;
             }
@@ -103,7 +106,10 @@ namespace WizTitleFixer
           //  wizdb.BackupIndex();
             wizdb.Open("");
            // MessageBox.Show(wizdb.DatabasePath.ToString());
-            wizdb.BackupIndex();
+           // wizdb.BackupIndex();
+          
+           // fi.MoveTo(
+            File.Copy(wizdb.DatabasePath + "index.db", wizdb.DatabasePath + "indexbk.db", true);
             MessageBox.Show("以系统日期-数字形式备份的db\r\n最多三个一天");
             wizdb.Close();
         }
@@ -144,7 +150,7 @@ namespace WizTitleFixer
                 qu.TrimToSize();
             }
             
-
+           
             //去除重复的.
             if (!qu.Contains(key))
                 qu.Enqueue(key);
@@ -160,6 +166,33 @@ namespace WizTitleFixer
             }
             xmlDoc.Save(Application.ExecutablePath + ".config");
              
+        }
+
+        private void btnRecover_Click(object sender, EventArgs e)
+        {
+       
+           
+            wizdb.Open("indxbk.db");
+            // MessageBox.Show(wizdb.DatabasePath.ToString());
+
+            progress = 0;
+            total = wizdb.GetAllDocuments().Count;
+            progressBar1.Minimum = progress;
+            progressBar1.Maximum = total;
+            // fi.MoveTo(
+            File.Copy(wizdb.DatabasePath + "indexbk.db", wizdb.DatabasePath + "index.db", true);
+            wizdb.Close();
+            wizdb.Open("");
+            foreach (var doc in wizdb.GetAllDocuments())
+            {
+             
+                doc.Name=doc.Title+".wiz";
+                progress++;
+                progressBar1.Value = progress;
+                
+            }
+            wizdb.Close();
+
         }
       
     }
