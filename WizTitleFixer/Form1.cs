@@ -2,7 +2,6 @@
 using System.Text;
 using System.Windows.Forms;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.IO;
@@ -31,39 +30,7 @@ namespace WizTitleFixer
         private WizKMCoreLib.WizDatabase wizdb = new WizKMCoreLib.WizDatabase();
         private WizKMCoreLib.WizDocument wizdoc = new WizDocument();
        
-        private void btnConnect_Click(object sender, EventArgs e)
-        {
-           
-            string str;
-            str = cmbExpress.Text;
-            SetConfigValue(str);
-            
-            wizdb.Open("");
-            progress = 0;
-            total = wizdb.GetAllDocuments().Count;
-            progressBar1.Minimum = progress;
-            progressBar1.Maximum = total;
-
-            foreach (var  doc in wizdb.GetAllDocuments())
-            {
-                    string s = TitleFixer(doc.Title, str);
-                    doc.ChangeTitleAndFileName(s);
-                    progress++;
-                    progressBar1.Value = progress;
-            }
-
-            wizdb.Close();
-            lbFixedTitles.Items.Clear();
-            if (sb.Length>0)
-            {
-                string[] strs = sb.ToString().Split('\t');
-                foreach (var s in strs)
-                    lbFixedTitles.Items.Add(s);
-            }
-            else
-                lbFixedTitles.Items.Add("暂时没有找到可以清理的标题");
-        }
-
+      
 
         /// <summary>
         /// 將包含part的字符串清理掉
@@ -110,7 +77,7 @@ namespace WizTitleFixer
           
            // fi.MoveTo(
             File.Copy(wizdb.DatabasePath + "index.db", wizdb.DatabasePath + "indexbk.db", true);
-            MessageBox.Show("以系统日期-数字形式备份的db\r\n最多三个一天");
+            MessageBox.Show("备份在数据库文件夹下面indexbk.db");
             wizdb.Close();
         }
 
@@ -170,23 +137,36 @@ namespace WizTitleFixer
 
         private void btnRecover_Click(object sender, EventArgs e)
         {
-       
-           
+            
+            lbPre.Items.Clear();
+            lbRes.Items.Clear();
+
             wizdb.Open("indxbk.db");
-            // MessageBox.Show(wizdb.DatabasePath.ToString());
 
             progress = 0;
             total = wizdb.GetAllDocuments().Count;
             progressBar1.Minimum = progress;
             progressBar1.Maximum = total;
-            // fi.MoveTo(
+           
+            //将备份db数据库还原
             File.Copy(wizdb.DatabasePath + "indexbk.db", wizdb.DatabasePath + "index.db", true);
+
+            //关闭备份数据库,打开新数据库
             wizdb.Close();
             wizdb.Open("");
+
             foreach (var doc in wizdb.GetAllDocuments())
             {
-             
-                doc.Name=doc.Title+".wiz";
+
+               // if ((doc.Title + ".ziw") != doc.Name)
+
+                //doc.Name = doc.Title + ".ziw";
+                
+                    string s = doc.Title;
+                   // doc.ChangeTitleAndFileName(s);
+                  // doc.Name = s + ".ziw";
+                   //doc.FileName = doc.FilePath.Tostring()+ s;
+                   // doc.UpdateDocument5(doc.Name);
                 progress++;
                 progressBar1.Value = progress;
                 
@@ -194,6 +174,77 @@ namespace WizTitleFixer
             wizdb.Close();
 
         }
+
+        public void Deal()
+        {
+
+           // SetConfigValue(cmbExpress.Text);
+
+            wizdb.Open("");
+            progress = 0;
+            total = wizdb.GetAllDocuments().Count;
+            progressBar1.Minimum = progress;
+            progressBar1.Maximum = total;
+
+            
+        }
+        private void btnRepView_Click(object sender, EventArgs e)
+        {
+            cmbExpress.Items.Clear();
+            SetConfigValue(cmbExpress.Text);
+            foreach (var str in GetConfigValue("myReg").Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
+            {
+                cmbExpress.Items.Add(str);
+            }
+
+            Deal();
+            lbPre.Items.Clear();
+            lbRes.Items.Clear();
+            sb.Clear();
+            foreach (var doc in wizdb.GetAllDocuments())
+            {
+                string s = TitleFixer(doc.Title, cmbExpress.Text);
+
+                //  doc.ChangeTitleAndFileName(s);
+                progress++;
+                progressBar1.Value = progress;
+            }
+            if (sb.Length > 0)
+            {
+                string[] strs = sb.ToString().Split('\t');
+                
+                foreach (var s in strs)
+                {
+                    lbPre.Items.Add(s);
+                    lbRes.Items.Add(TitleFixer(s, cmbExpress.Text));
+                }
+            }
+        }
+
+        private void btnReplace_Click(object sender, EventArgs e)
+        {
+            Deal();
+            foreach (var doc in wizdb.GetAllDocuments())
+            {
+                string s = TitleFixer(doc.Title, cmbExpress.Text);
+                doc.ChangeTitleAndFileName(s);
+                progress++;
+                progressBar1.Value = progress;
+            }
+
+            wizdb.Close();
+            //lbPre.Items.Clear();
+            //if (sb.Length > 0)
+            //{
+            //    string[] strs = sb.ToString().Split('\t');
+            //    foreach (var s in strs)
+            //        lbPre.Items.Add(s);
+            //}
+            //else
+            //    lbPre.Items.Add("暂时没有找到可以清理的标题");
+        }
+
+   
       
     }
 }
