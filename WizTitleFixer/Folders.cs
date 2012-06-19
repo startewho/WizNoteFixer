@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WizKMControlsLib;
+using WizKMCoreLib;
 
 namespace WizTitleFixer
 {
@@ -17,9 +19,9 @@ namespace WizTitleFixer
         {
             InitializeComponent();
             wizctrl=new  WizFolderCtrl();
-     
-            foreach(var s in wizctrl.folders)
-             cmbFolderList.Items.Add(s);
+
+            foreach (WizFolder s in wizctrl.folders)
+             cmbFolderList.Items.Add(s.Name);
       
         }
 

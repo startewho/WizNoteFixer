@@ -46,7 +46,7 @@
             this.btnRepView.Name = "btnRepView";
             this.btnRepView.Size = new System.Drawing.Size(107, 23);
             this.btnRepView.TabIndex = 0;
-            this.btnRepView.Text = "Review";
+            this.btnRepView.Text = "Preview";
             this.btnRepView.UseVisualStyleBackColor = true;
             this.btnRepView.Click += new System.EventHandler(this.btnRepView_Click);
             // 
@@ -94,7 +94,6 @@
             this.cmbExpress.Name = "cmbExpress";
             this.cmbExpress.Size = new System.Drawing.Size(527, 20);
             this.cmbExpress.TabIndex = 7;
-           
             // 
             // btnRecover
             // 

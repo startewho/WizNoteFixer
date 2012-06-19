@@ -97,14 +97,14 @@ namespace WizTitleFixer
 
         }
 
-        internal static void SetConfigValue(string key)
+        internal static void SetConfigValue(string key,int itemmax)
         {
         
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(Application.ExecutablePath + ".config");
 
             //最多可以保存9个
-            Queue qu = new Queue(9);
+            Queue qu = new Queue(itemmax);
 
             foreach (XmlElement xe in xmlDoc.SelectNodes("/configuration/myReg"))
             {
@@ -191,7 +191,7 @@ namespace WizTitleFixer
         private void btnRepView_Click(object sender, EventArgs e)
         {
             cmbExpress.Items.Clear();
-            SetConfigValue(cmbExpress.Text);
+            SetConfigValue(cmbExpress.Text,9);
             foreach (var str in GetConfigValue("myReg").Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
             {
                 cmbExpress.Items.Add(str);
@@ -224,10 +224,20 @@ namespace WizTitleFixer
         private void btnReplace_Click(object sender, EventArgs e)
         {
             Deal();
+
             foreach (var doc in wizdb.GetAllDocuments())
             {
                 string s = TitleFixer(doc.Title, cmbExpress.Text);
-                doc.ChangeTitleAndFileName(s);
+                try
+                {
+                    doc.ChangeTitleAndFileName(s);
+                }
+                 
+               catch( Exception ex)
+                {
+                    ex.GetHashCode();
+                }
+
                 progress++;
                 progressBar1.Value = progress;
             }

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizTitleFixer", "WizTitleFixer\WizTitleFixer.csproj", "{A0209388-913B-475C-A9F3-BF984CA85719}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventCounter", "EventCounter\EventCounter.csproj", "{4C5409C3-8715-4AA9-9A33-33DE0C2683D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,16 @@ Global
 		{A0209388-913B-475C-A9F3-BF984CA85719}.Release|Mixed Platforms.Build.0 = Release|x86
 		{A0209388-913B-475C-A9F3-BF984CA85719}.Release|x86.ActiveCfg = Release|x86
 		{A0209388-913B-475C-A9F3-BF984CA85719}.Release|x86.Build.0 = Release|x86
+		{4C5409C3-8715-4AA9-9A33-33DE0C2683D0}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{4C5409C3-8715-4AA9-9A33-33DE0C2683D0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{4C5409C3-8715-4AA9-9A33-33DE0C2683D0}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{4C5409C3-8715-4AA9-9A33-33DE0C2683D0}.Debug|x86.ActiveCfg = Debug|x86
+		{4C5409C3-8715-4AA9-9A33-33DE0C2683D0}.Debug|x86.Build.0 = Debug|x86
+		{4C5409C3-8715-4AA9-9A33-33DE0C2683D0}.Release|Any CPU.ActiveCfg = Release|x86
+		{4C5409C3-8715-4AA9-9A33-33DE0C2683D0}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{4C5409C3-8715-4AA9-9A33-33DE0C2683D0}.Release|Mixed Platforms.Build.0 = Release|x86
+		{4C5409C3-8715-4AA9-9A33-33DE0C2683D0}.Release|x86.ActiveCfg = Release|x86
+		{4C5409C3-8715-4AA9-9A33-33DE0C2683D0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,13 +11,13 @@ namespace WizTitleFixer
     class WizFolderCtrl
     {
         WizDatabase wizdb;
-        public string[] folders { set; get; }
+        public WizFolderCollection folders;
         public WizFolderCtrl()
         {
              wizdb = new WizKMCoreLib.WizDatabase();
             //WizDocument wizdoc = new WizDocument();
             wizdb.Open("");
-            folders = wizdb.GetAllTagsName().Split(';');
+            folders =wizdb.Folders;
             wizdb.Close();
         }
 
