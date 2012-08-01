@@ -42,94 +42,66 @@
             // 
             // btnRepView
             // 
-            this.btnRepView.Location = new System.Drawing.Point(546, 10);
+            resources.ApplyResources(this.btnRepView, "btnRepView");
             this.btnRepView.Name = "btnRepView";
-            this.btnRepView.Size = new System.Drawing.Size(107, 23);
-            this.btnRepView.TabIndex = 0;
-            this.btnRepView.Text = "Preview";
             this.btnRepView.UseVisualStyleBackColor = true;
             this.btnRepView.Click += new System.EventHandler(this.btnRepView_Click);
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(668, 415);
+            resources.ApplyResources(this.progressBar1, "progressBar1");
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(107, 23);
-            this.progressBar1.TabIndex = 3;
             // 
             // btnBackUp
             // 
-            this.btnBackUp.Location = new System.Drawing.Point(668, 140);
+            resources.ApplyResources(this.btnBackUp, "btnBackUp");
             this.btnBackUp.Name = "btnBackUp";
-            this.btnBackUp.Size = new System.Drawing.Size(107, 23);
-            this.btnBackUp.TabIndex = 4;
-            this.btnBackUp.Text = "BackUp";
             this.btnBackUp.UseVisualStyleBackColor = true;
-            this.btnBackUp.Visible = false;
             this.btnBackUp.Click += new System.EventHandler(this.btnBackUp_Click);
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(668, 242);
+            resources.ApplyResources(this.btnHelp, "btnHelp");
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(107, 23);
-            this.btnHelp.TabIndex = 5;
-            this.btnHelp.Text = "Help";
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // lbPre
             // 
+            resources.ApplyResources(this.lbPre, "lbPre");
             this.lbPre.FormattingEnabled = true;
-            this.lbPre.ItemHeight = 12;
-            this.lbPre.Location = new System.Drawing.Point(13, 40);
             this.lbPre.Name = "lbPre";
-            this.lbPre.Size = new System.Drawing.Size(641, 196);
-            this.lbPre.TabIndex = 6;
             // 
             // cmbExpress
             // 
+            resources.ApplyResources(this.cmbExpress, "cmbExpress");
             this.cmbExpress.FormattingEnabled = true;
-            this.cmbExpress.Location = new System.Drawing.Point(13, 12);
             this.cmbExpress.Name = "cmbExpress";
-            this.cmbExpress.Size = new System.Drawing.Size(527, 20);
-            this.cmbExpress.TabIndex = 7;
             // 
             // btnRecover
             // 
-            this.btnRecover.Location = new System.Drawing.Point(668, 202);
+            resources.ApplyResources(this.btnRecover, "btnRecover");
             this.btnRecover.Name = "btnRecover";
-            this.btnRecover.Size = new System.Drawing.Size(107, 23);
-            this.btnRecover.TabIndex = 4;
-            this.btnRecover.Text = "Recover";
             this.btnRecover.UseVisualStyleBackColor = true;
-            this.btnRecover.Visible = false;
             this.btnRecover.Click += new System.EventHandler(this.btnRecover_Click);
             // 
             // btnReplace
             // 
-            this.btnReplace.Location = new System.Drawing.Point(668, 12);
+            resources.ApplyResources(this.btnReplace, "btnReplace");
             this.btnReplace.Name = "btnReplace";
-            this.btnReplace.Size = new System.Drawing.Size(107, 23);
-            this.btnReplace.TabIndex = 8;
-            this.btnReplace.Text = "Replace";
             this.btnReplace.UseVisualStyleBackColor = true;
             this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
             // 
             // lbRes
             // 
+            resources.ApplyResources(this.lbRes, "lbRes");
             this.lbRes.FormattingEnabled = true;
-            this.lbRes.ItemHeight = 12;
-            this.lbRes.Location = new System.Drawing.Point(13, 242);
             this.lbRes.Name = "lbRes";
-            this.lbRes.Size = new System.Drawing.Size(641, 196);
-            this.lbRes.TabIndex = 9;
             // 
             // WizTitleFixer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 450);
             this.Controls.Add(this.lbRes);
             this.Controls.Add(this.btnReplace);
             this.Controls.Add(this.cmbExpress);
@@ -139,9 +111,9 @@
             this.Controls.Add(this.btnBackUp);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btnRepView);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "WizTitleFixer";
-            this.Text = "WizTitleFixer";
             this.ResumeLayout(false);
 
         }
