@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WizTitleFixer));
-            this.btnRepView = new System.Windows.Forms.Button();
+            this.btnReView = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btnBackUp = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
@@ -40,12 +40,12 @@
             this.lbRes = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // btnRepView
+            // btnReView
             // 
-            resources.ApplyResources(this.btnRepView, "btnRepView");
-            this.btnRepView.Name = "btnRepView";
-            this.btnRepView.UseVisualStyleBackColor = true;
-            this.btnRepView.Click += new System.EventHandler(this.btnRepView_Click);
+            resources.ApplyResources(this.btnReView, "btnReView");
+            this.btnReView.Name = "btnReView";
+            this.btnReView.UseVisualStyleBackColor = true;
+            this.btnReView.Click += new System.EventHandler(this.btnReView_Click);
             // 
             // progressBar1
             // 
@@ -110,7 +110,7 @@
             this.Controls.Add(this.btnRecover);
             this.Controls.Add(this.btnBackUp);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.btnRepView);
+            this.Controls.Add(this.btnReView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "WizTitleFixer";
@@ -120,7 +120,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnRepView;
+        private System.Windows.Forms.Button btnReView;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btnBackUp;
         private System.Windows.Forms.Button btnHelp;

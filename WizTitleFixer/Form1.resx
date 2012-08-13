@@ -123,7 +123,7 @@
   <data name="&gt;&gt;cmbExpress.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnRepView.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnReView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmbExpress.ZOrder" xml:space="preserve">
@@ -143,7 +143,7 @@
   <data name="btnRecover.Text" xml:space="preserve">
     <value>Recover</value>
   </data>
-  <data name="btnRepView.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnReView.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 23</value>
   </data>
   <data name="btnBackUp.Location" type="System.Drawing.Point, System.Drawing">
@@ -161,7 +161,7 @@
   <data name="btnHelp.Text" xml:space="preserve">
     <value>Help</value>
   </data>
-  <data name="btnRepView.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnReView.Location" type="System.Drawing.Point, System.Drawing">
     <value>546, 10</value>
   </data>
   <data name="btnReplace.Location" type="System.Drawing.Point, System.Drawing">
@@ -170,7 +170,7 @@
   <data name="&gt;&gt;btnBackUp.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnRepView.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnReView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="cmbExpress.Location" type="System.Drawing.Point, System.Drawing">
@@ -185,7 +185,7 @@
   <data name="lbRes.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;btnRepView.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnReView.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnRecover.Parent" xml:space="preserve">
@@ -203,7 +203,7 @@
   <data name="&gt;&gt;btnReplace.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnRepView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnReView.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="&gt;&gt;lbPre.Name" xml:space="preserve">
@@ -224,8 +224,8 @@
   <data name="&gt;&gt;btnRecover.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnRepView.Name" xml:space="preserve">
-    <value>btnRepView</value>
+  <data name="&gt;&gt;btnReView.Name" xml:space="preserve">
+    <value>btnReView</value>
   </data>
   <data name="btnReplace.Text" xml:space="preserve">
     <value>Replace</value>
@@ -6547,7 +6547,7 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 12</value>
   </data>
-  <data name="btnRepView.Text" xml:space="preserve">
+  <data name="btnReView.Text" xml:space="preserve">
     <value>Preview</value>
   </data>
   <data name="progressBar1.Location" type="System.Drawing.Point, System.Drawing">

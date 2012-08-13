@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -16,8 +17,8 @@ namespace WizTitleFixer
         public WizTitleFixer( )
         {
             InitializeComponent( );
-            this.Text = "WizTitleFixer|v1.3";
-            foreach (var str in GetConfigValue("myReg").Split("\r\n".ToCharArray( ), StringSplitOptions.RemoveEmptyEntries))
+            this.Text = "WizTitleFixer|v1.4";
+            foreach (var str in GetConfigValue("mathWord").Split("\r\n".ToCharArray( ), StringSplitOptions.RemoveEmptyEntries))
             {
                 cmbExpress.Items.Add(str);
             }
@@ -25,9 +26,10 @@ namespace WizTitleFixer
 
         private int total;
         private int progress;
-        private static StringBuilder sb = new StringBuilder(64);
+        //private static StringBuilder sb = new StringBuilder(128);
         private WizKMCoreLib.WizDatabase wizdb = new WizKMCoreLib.WizDatabase( );
         private WizKMCoreLib.WizDocument wizdoc = new WizDocument( );
+        List<string> liststring = new List<string>(20);
 
         /// <summary>
         /// 將包含part的字符串清理掉
@@ -35,9 +37,9 @@ namespace WizTitleFixer
         /// <param name="str">源字符 串</param>
         /// <param name="part">被清理字符串(支持正則)</param>
         /// <returns></returns>
-        private static string TitleFixer(string str, string part)
+           public void TitleFixer(string str, string part)
         {
-
+            string temp = str; 
             string[] s = part.Split(';');
             foreach (var s1 in s)
             {
@@ -46,13 +48,15 @@ namespace WizTitleFixer
                 string strn = Regex.Replace(str, s1, "", RegexOptions.IgnoreCase);
                 if (strn.Length < str.Length)
                 {
-                    sb.Append(str + "\t");
                     str = strn;
                     strn = null;
                 }
                
             }
-            return str;
+
+            if(str.Length<temp.Length)
+                liststring.Add(temp+"\t"+str);
+      
         }
 
         private void btnHelp_Click(object sender, EventArgs e)
@@ -61,6 +65,7 @@ namespace WizTitleFixer
             strb.Append("被清理词组请用';'分开\r\n");
             strb.Append("支持正则,默认将清理词组替换为空\r\n");
             strb.Append("已知BUG:当替换完成把标题替换为空时,会报错\r\n");
+            strb.Append("在替换过程中，程序会推动响应。请耐心等待\r\n");
             MessageBox.Show(strb.ToString( ));
         }
 
@@ -99,7 +104,7 @@ namespace WizTitleFixer
             //最多可以保存9个
             Queue qu = new Queue(itemmax);
 
-            foreach (XmlElement xe in xmlDoc.SelectNodes("/configuration/myReg"))
+            foreach (XmlElement xe in xmlDoc.SelectNodes("/configuration/mathWord"))
             {
                 qu.Enqueue(xe.InnerText);
             }
@@ -114,14 +119,14 @@ namespace WizTitleFixer
             if (!qu.Contains(key))
                 qu.Enqueue(key);
 
-            var root = xmlDoc.SelectSingleNode("configuration");
+            XmlNode root = xmlDoc.SelectSingleNode("configuration");
 
             //主要是了保证不重复
             root.RemoveAll( );
 
             foreach (string str in qu)
             {
-                XmlElement xElem = xmlDoc.CreateElement("myReg");
+                XmlElement xElem = xmlDoc.CreateElement("mathWord");
                 xElem.InnerText = str;
                 root.AppendChild(xElem);
             }
@@ -171,37 +176,36 @@ namespace WizTitleFixer
             progressBar1.Maximum = total;
         }
 
-        private void btnRepView_Click(object sender, EventArgs e)
+        private void btnReView_Click(object sender, EventArgs e)
         {
             cmbExpress.Items.Clear( );
             SetConfigValue(cmbExpress.Text, 9);
-            foreach (var str in GetConfigValue("myReg").Split("\r\n".ToCharArray( ), StringSplitOptions.RemoveEmptyEntries))
+            foreach (var str in GetConfigValue("mathWord").Split("\r\n".ToCharArray( ), StringSplitOptions.RemoveEmptyEntries))
             {
                 cmbExpress.Items.Add(str);
             }
 
             ConnectData( );
             lbPre.Items.Clear( );
-            lbRes.Items.Clear( );
-            sb.Clear( );
+            lbRes.Items.Clear( ); 
+
             string[] titlles = wizdb.AllDocumentsTitle.Split('\n');
             foreach (var title in titlles)
             {
-                string s = TitleFixer(title, cmbExpress.Text);
-
+                liststring.Clear( );
+               TitleFixer(title, cmbExpress.Text);
                 progress++;
                 progressBar1.Value = progress;
             }
-            if (sb.Length > 0)
-            {
-                string[] strs = sb.ToString( ).Split('\t');
 
-                foreach (var s in strs)
+             foreach (var s in liststring)
                 {
-                    lbPre.Items.Add(s);
-                    lbRes.Items.Add(TitleFixer(s, cmbExpress.Text));
-                }
-            }
+                    string[] sp = s.Split('\t');
+                    lbPre.Items.Add(sp[0]);
+
+                    lbRes.Items.Add(sp[1]);
+                } 
+
             wizdb.Close( );
         }
 
@@ -209,22 +213,32 @@ namespace WizTitleFixer
         {
             ConnectData( );
 
-            foreach (var doc in wizdb.GetAllDocuments( ))
+            progressBar1.Maximum = liststring.Count;
+            foreach (var s in liststring)
             {
-              
-                try
-                {
-                    doc.ChangeTitleAndFileName(TitleFixer(doc.Title, cmbExpress.Text));
-                }
+ 
+               string[] sp = s.Split('\t');
+               IWizDocumentCollection docs= wizdb.DocumentsFromTitle(sp[0], 0);
+               if(docs.count>0)
+               {
+                   var doc = docs[0];
+                    try
+                    {
+                        doc.ChangeTitleAndFileName(sp[1]);
+                    }
 
-                catch (Exception ex)
-                {
-                    ex.GetHashCode( );
-                }
+                    catch (Exception ex)
+                    {
+                        ex.GetHashCode();
+                       // MessageBox.Show(ex.Message);
+                    }
 
-                progress++;
-                progressBar1.Value = progress;
+
+               }
+               progress++;
+               progressBar1.Value = progress;
             }
+            
 
             wizdb.Close( );
             //lbPre.Items.Clear();
